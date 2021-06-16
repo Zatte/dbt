@@ -148,7 +148,7 @@ class GraphRunnableTask(ManifestTask):
     def raise_on_first_error(self):
         return False
 
-    def get_runner_type(self):
+    def get_runner_type(self, node):
         raise NotImplementedException('Not Implemented')
 
     def result_path(self):
@@ -165,7 +165,7 @@ class GraphRunnableTask(ManifestTask):
             run_count = self.run_count
             num_nodes = self.num_nodes
 
-        cls = self.get_runner_type()
+        cls = self.get_runner_type(node) #TODO: reduce this to just node.resource_type?)
         return cls(self.config, adapter, node, run_count, num_nodes)
 
     def call_runner(self, runner):
